@@ -1,3 +1,4 @@
-import tests_user
+import users_tests
 
-tests_user.test_get_users()
+#users_tests.test_get_users()
+users_tests.create_user_test()
