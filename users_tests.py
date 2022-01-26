@@ -1,8 +1,14 @@
 import requests
 import json
 
-root_url = "http://localhost:5000"
-headers = {'accept': 'application/json','Content-Type': 'application/json',} 
+successful_codes = (200, 201, 202, 203)
+
+host = "http://localhost"
+port = "5000"
+root_url = f"{host}:{port}"
+
+headers = {'Content-type': 'application/json', 
+		   'Accept': 'application/json'}
 
 def test_get_users():
 	url = f"{root_url}/users"
@@ -25,3 +31,16 @@ def create_user_test():
 		print(f'User {data} created successfull')
 	else:
 		print(f"Creation user failed {status_code} and {response.json()}")
+
+def get_user_id_test():
+	url = f"{root_url}/users"
+	body = {"user_id":1}
+	response = requests.get(url)
+	status_code = response.status_code
+	if status_code in successful_codes:
+		res_data = response.json()
+		print(res_data)
+	else:
+		print(f"Request failed on {root_url} with status_code: {status_code}")
+
+	
