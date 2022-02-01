@@ -1,7 +1,6 @@
-import users_tests
+from views import app
+from settings import APP_SECRET_KEY, HOST
 
-#users_tests.test_get_users()
-#users_tests.create_user_test()
-#users_tests.get_user_id()
-users_tests.get_user_id_test()
-
+if __name__ == "__main__":
+	app.config['SECRET_KEY'] = APP_SECRET_KEY
+	app.run(debug=True, host=HOST)

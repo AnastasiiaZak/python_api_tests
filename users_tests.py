@@ -22,9 +22,17 @@ def test_get_users():
 		print(f"Get_users test FAILED. Expected data type: {expected_body_type}. Actual data type: {body_type}")
 
 def create_user_test():
-	data = {"username": "string","email": "test@gmail.com","password": "string"}
+	data = {"username": "Anny","email": "test@gmail.com","password": "qwerty123"}
 	url = f"{root_url}/users"
 	response = requests.post(url,headers=headers, data=json.dumps(data))
+	assert response.status_code == 201
+	user_id = response.json().get("id")
+	user_url = f"{url}/{user_id}"
+	response = requests.get(user_url)
+	assert response.status_code == 200
+	response_data = response.json()
+	del response_data["id"]
+	assert response_data == data
 	status_code = response.status_code
 	
 	if status_code == 201:
